@@ -11,11 +11,14 @@ app.get('/', (req, res) => {
 
 app.post('/convert', upload.single('image'), (req, res) => {
   console.log('Received image:', req.file);
+  console.log('Image buffer:', req.file.buffer);
+  console.log('Image size:', req.file.size);
   const image = req.file;
   const pdf = new jspdf();
   pdf.addImage(image.buffer, 'JPEG', 0, 0);
   const pdfData = pdf.output('buffer');
   console.log('Generated PDF:', pdfData);
+  console.log('PDF size:', pdfData.length);
   res.set("Content-Disposition", `attachment; filename="image.pdf"`);
   res.set("Content-Type", "application/pdf");
   res.send(pdfData);
