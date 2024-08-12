@@ -6,7 +6,8 @@ const jspdf = require('jspdf');
 const upload = multer({ dest: './uploads/' });
 
 app.get('/', (req, res) => {
-  res.sendFile('Hello World!');
+  console.log('Serving index.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.post('/convert', upload.single('image'), (req, res) => {
